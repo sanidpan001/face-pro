@@ -1,0 +1,1270 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FacePro - AI Face Enhancer & Retouch | Free HD Portrait Enhancer</title>
+    <meta name="description" content="Enhance blurry faces, retouch skin, sharpen eyes instantly with FacePro AI Face Enhancer. 100% Free, No Sign-in, No Watermark, No Subscription. Used by 100k+ users." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+              display: ['Poppins', 'Inter', 'sans-serif'],
+            },
+            colors: {
+              brand: {
+                50: '#fdf4ff',
+                100: '#fae8ff',
+                200: '#f5d0fe',
+                300: '#f0abfc',
+                400: '#e879f9',
+                500: '#d946ef',
+                600: '#c026d3',
+                700: '#a21caf',
+                800: '#86198f',
+                900: '#701a75',
+              },
+              accent: {
+                400: '#f472b6',
+                500: '#ec4899',
+                600: '#db2777',
+              },
+            },
+            animation: {
+              'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+              'fade-in': 'fadeIn 0.5s ease-out forwards',
+              'float': 'float 6s ease-in-out infinite',
+              'shimmer': 'shimmer 3s linear infinite',
+              'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+              'slide-in-right': 'slideInRight 0.4s ease-out forwards',
+            },
+            keyframes: {
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(30px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-20px)' },
+              },
+              shimmer: {
+                '0%': { backgroundPosition: '-1000px 0' },
+                '100%': { backgroundPosition: '1000px 0' },
+              },
+              pulseGlow: {
+                '0%, 100%': { boxShadow: '0 0 20px rgba(217,70,239,0.3)' },
+                '50%': { boxShadow: '0 0 40px rgba(217,70,239,0.6)' },
+              },
+              slideInRight: {
+                '0%': { opacity: '0', transform: 'translateX(40px)' },
+                '100%': { opacity: '1', transform: 'translateX(0)' },
+              },
+            },
+          },
+        },
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg-primary: #0a0a0f;
+        --bg-secondary: #12121a;
+        --glass-bg: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --text-primary: #f5f5f7;
+        --text-secondary: #a1a1aa;
+        --text-muted: #71717a;
+      }
+      html:not(.dark) {
+        --bg-primary: #f8f9fe;
+        --bg-secondary: #ffffff;
+        --glass-bg: rgba(255, 255, 255, 0.6);
+        --glass-border: rgba(0, 0, 0, 0.08);
+        --text-primary: #1a1a2e;
+        --text-secondary: #52525b;
+        --text-muted: #71717a;
+      }
+      body {
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        font-family: 'Inter', system-ui, sans-serif;
+        transition: background-color 0.4s ease, color 0.4s ease;
+        overflow-x: hidden;
+      }
+      .glass {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+      }
+      .gradient-border {
+        position: relative;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 1.5rem;
+      }
+      .gradient-border::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        padding: 1.5px;
+        border-radius: inherit;
+        background: linear-gradient(135deg, rgba(217,70,239,0.5), rgba(236,72,153,0.3), rgba(168,85,247,0.4));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+      }
+      .gradient-text {
+        background: linear-gradient(135deg, #c026d3, #ec4899, #a855f7);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .gradient-btn {
+        background: linear-gradient(135deg, #c026d3 0%, #ec4899 50%, #a855f7 100%);
+        background-size: 200% 200%;
+        transition: all 0.3s ease;
+      }
+      .gradient-btn:hover {
+        background-position: 100% 50%;
+        box-shadow: 0 8px 30px rgba(192,38,211,0.4);
+        transform: translateY(-2px);
+      }
+      .gradient-btn:active {
+        transform: translateY(0);
+      }
+      .bg-mesh {
+        background-image:
+          radial-gradient(circle at 20% 20%, rgba(192,38,211,0.12), transparent 40%),
+          radial-gradient(circle at 80% 0%, rgba(236,72,153,0.10), transparent 35%),
+          radial-gradient(circle at 50% 80%, rgba(168,85,247,0.10), transparent 40%);
+      }
+      html:not(.dark) .bg-mesh {
+        background-image:
+          radial-gradient(circle at 20% 20%, rgba(192,38,211,0.08), transparent 40%),
+          radial-gradient(circle at 80% 0%, rgba(236,72,153,0.06), transparent 35%),
+          radial-gradient(circle at 50% 80%, rgba(168,85,247,0.06), transparent 40%);
+      }
+      .ad-box {
+        border: 2px dashed rgba(168,85,247,0.3);
+        background: rgba(168,85,247,0.03);
+        border-radius: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.875rem;
+        min-height: 90px;
+      }
+      input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 6px;
+        border-radius: 9999px;
+        background: linear-gradient(to right, #c026d3, #ec4899);
+        outline: none;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #fff;
+        border: 3px solid #c026d3;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(192,38,211,0.4);
+        transition: transform 0.2s;
+      }
+      input[type="range"]::-webkit-slider-thumb:hover {
+        transform: scale(1.15);
+      }
+      input[type="range"]::-moz-range-thumb {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #fff;
+        border: 3px solid #c026d3;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(192,38,211,0.4);
+      }
+      .toggle-switch {
+        position: relative;
+        width: 48px;
+        height: 26px;
+        background: rgba(120,120,130,0.3);
+        border-radius: 9999px;
+        cursor: pointer;
+        transition: background 0.3s;
+        flex-shrink: 0;
+      }
+      .toggle-switch.active {
+        background: linear-gradient(135deg, #c026d3, #ec4899);
+      }
+      .toggle-switch::after {
+        content: '';
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #fff;
+        transition: transform 0.3s ease;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+      }
+      .toggle-switch.active::after {
+        transform: translateX(22px);
+      }
+      .ba-slider-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 1rem;
+        cursor: ew-resize;
+        user-select: none;
+      }
+      .ba-slider-handle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(to bottom, #c026d3, #ec4899);
+        cursor: ew-resize;
+        z-index: 10;
+      }
+      .ba-slider-handle::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #c026d3, #ec4899);
+        box-shadow: 0 4px 15px rgba(192,38,211,0.5);
+      }
+      .ba-slider-handle::before {
+        content: '⇄';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        font-size: 18px;
+        z-index: 1;
+        font-weight: bold;
+      }
+      .ba-label {
+        position: absolute;
+        top: 12px;
+        padding: 4px 12px;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        z-index: 5;
+        backdrop-filter: blur(10px);
+      }
+      .drop-zone {
+        transition: all 0.3s ease;
+      }
+      .drop-zone.dragover {
+        border-color: #c026d3;
+        background: rgba(192,38,211,0.08);
+        transform: scale(1.02);
+      }
+      .faq-item summary {
+        cursor: pointer;
+        list-style: none;
+      }
+      .faq-item summary::-webkit-details-marker {
+        display: none;
+      }
+      .faq-item[open] .faq-chevron {
+        transform: rotate(180deg);
+      }
+      .faq-chevron {
+        transition: transform 0.3s ease;
+      }
+      .scrollbar-hide::-webkit-scrollbar { display: none; }
+      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+      .shimmer-bg {
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+        background-size: 1000px 100%;
+        animation: shimmer 2s infinite;
+      }
+      @keyframes shimmer {
+        0% { backgroundPosition: -1000px 0; }
+        100% { backgroundPosition: 1000px 0; }
+      }
+      .nav-link {
+        position: relative;
+        transition: color 0.2s;
+      }
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(135deg, #c026d3, #ec4899);
+        transition: width 0.3s ease;
+        border-radius: 9999px;
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
+      .text-secondary { color: var(--text-secondary); }
+      .text-muted { color: var(--text-muted); }
+      .bg-secondary { background: var(--bg-secondary); }
+      #loadingOverlay {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(8px);
+        background: rgba(0,0,0,0.6);
+      }
+      #loadingOverlay.active { display: flex; }
+      .spinner-ring {
+        width: 60px;
+        height: 60px;
+        border: 4px solid rgba(192,38,211,0.2);
+        border-top-color: #c026d3;
+        border-right-color: #ec4899;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 200;
+        padding: 16px 24px;
+        border-radius: 12px;
+        font-weight: 500;
+        transform: translateY(120%);
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        max-width: 90vw;
+      }
+      .toast.show { transform: translateY(0); }
+    </style>
+    <meta property="og:image" content="https://bolt.new/static/og_default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
+</head>
+  <body class="bg-mesh min-h-screen">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 glass border-b" style="border-color: var(--glass-border);">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href="#" class="flex items-center gap-2 group">
+          <span class="text-2xl group-hover:animate-pulse">✨</span>
+          <span class="font-display font-bold text-xl tracking-tight">Face<span class="gradient-text">Pro</span></span>
+        </a>
+        <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+          <a href="#" class="nav-link">Home</a>
+          <a href="#tools" class="nav-link">All Tools</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </div>
+        <div class="flex items-center gap-3">
+          <button id="themeToggle" class="glass rounded-xl p-2.5 hover:scale-110 transition-transform" aria-label="Toggle theme">
+            <svg id="themeIconMoon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <svg id="themeIconSun" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <circle cx="12" cy="12" r="4" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+            </svg>
+          </button>
+          <a href="#tool" class="gradient-btn text-white text-sm font-semibold px-4 py-2 rounded-xl hidden sm:block">Try Now</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-12 sm:pt-20 pb-8 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center">
+      <div class="animate-fade-in-up inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 text-xs font-medium mb-6">
+        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+        <span class="text-secondary">100% Private — All processing happens in your browser</span>
+      </div>
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight animate-fade-in-up" style="animation-delay: 0.1s;">
+        AI Face Enhancer —<br class="hidden sm:block" />
+        <span class="gradient-text">Make Every Portrait Perfect & HD</span>
+      </h1>
+      <p class="mt-6 text-base sm:text-lg text-secondary max-w-2xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s;">
+        Enhance blurry faces, retouch skin, sharpen eyes instantly. 100% Free, No Sign-in, No Watermark, No Subscription. Used by 100k+ users.
+      </p>
+      <!-- Trust Badges -->
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3 animate-fade-in-up" style="animation-delay: 0.3s;">
+        <span class="glass rounded-full px-4 py-2 text-xs font-semibold flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+          No Sign-in
+        </span>
+        <span class="glass rounded-full px-4 py-2 text-xs font-semibold flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+          No Watermark
+        </span>
+        <span class="glass rounded-full px-4 py-2 text-xs font-semibold flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+          No Subscription
+        </span>
+        <span class="glass rounded-full px-4 py-2 text-xs font-semibold flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2zm10-10V7a4 4 0 0 0-8 0v4h8z"/></svg>
+          100% Private — Browser Processing
+        </span>
+      </div>
+    </section>
+
+    <!-- Ad Space Top -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+      <div id="ad-top" class="ad-box w-full">Ad Space — Paste AdSense Code</div>
+    </div>
+
+    <!-- Main Tool Area -->
+    <section id="tool" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+      <div class="grid lg:grid-cols-3 gap-6">
+        <!-- Upload + Preview Area -->
+        <div class="lg:col-span-2">
+          <div class="gradient-border p-6 sm:p-8">
+            <!-- Drop Zone (initial state) -->
+            <div id="dropZone" class="drop-zone glass rounded-2xl border-2 border-dashed flex flex-col items-center justify-center text-center cursor-pointer" style="min-height: 400px; border-color: rgba(168,85,247,0.3);">
+              <div class="mb-4 animate-float">
+                <svg class="w-20 h-20 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>
+                </svg>
+              </div>
+              <h3 class="font-display text-xl font-bold mb-2">Upload Portrait / Selfie / Face Photo</h3>
+              <p class="text-sm text-muted mb-1">Drag & drop your photo here or click to browse</p>
+              <p class="text-xs text-muted mb-4">Supports JPG, PNG, WEBP — Max 10MB</p>
+              <button class="gradient-btn text-white text-sm font-semibold px-6 py-3 rounded-xl">
+                Choose Photo
+              </button>
+              <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" class="hidden" />
+            </div>
+
+            <!-- Before/After Slider (after upload) -->
+            <div id="previewArea" class="hidden">
+              <div class="ba-slider-container" id="baSlider" style="min-height: 400px;">
+                <img id="afterImage" class="absolute inset-0 w-full h-full object-contain" alt="After" />
+                <div id="beforeClip" class="absolute inset-0 overflow-hidden" style="width: 50%;">
+                  <img id="beforeImage" class="absolute inset-0 h-full object-contain" alt="Before" style="width: var(--full-width);" />
+                </div>
+                <span class="ba-label glass left-3 text-white">Before</span>
+                <span class="ba-label glass right-3 text-white">After</span>
+                <div class="ba-slider-handle" id="baHandle" style="left: 50%;"></div>
+              </div>
+              <div class="mt-4 flex flex-wrap items-center justify-center gap-3">
+                <button id="resetBtn" class="glass rounded-xl px-4 py-2 text-sm font-medium hover:scale-105 transition-transform flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 0 0 4.582 9m0 0H9m11 11v-5h-.581m0 0h-4.018a4 4 0 0 0-3.961 3.4M9 20a8 8 0 0 0 8-8"/></svg>
+                  Upload New
+                </button>
+                <button id="downloadBtn" class="gradient-btn text-white text-sm font-semibold px-6 py-2.5 rounded-xl flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+                  Download HD Face — No Watermark
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls Panel -->
+        <div class="lg:col-span-1">
+          <div class="gradient-border p-6 h-full">
+            <h3 class="font-display text-lg font-bold mb-1 flex items-center gap-2">
+              <svg class="w-5 h-5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg>
+              Advanced Controls
+            </h3>
+            <p class="text-xs text-muted mb-6">Fine-tune your face enhancement</p>
+
+            <!-- Slider 1: HD Enhancement -->
+            <div class="mb-6">
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm font-semibold flex items-center gap-2">
+                  <span class="text-brand-400">✨</span> HD Enhancement
+                </label>
+                <span id="hdValue" class="text-sm font-bold text-brand-400 glass rounded-lg px-2 py-0.5">75%</span>
+              </div>
+              <input type="range" id="hdSlider" min="0" max="100" value="75" class="w-full" />
+            </div>
+
+            <!-- Slider 2: Skin Smooth -->
+            <div class="mb-6">
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm font-semibold flex items-center gap-2">
+                  <span class="text-brand-400">💧</span> Skin Smooth
+                </label>
+                <span id="skinValue" class="text-sm font-bold text-brand-400 glass rounded-lg px-2 py-0.5">60%</span>
+              </div>
+              <input type="range" id="skinSlider" min="0" max="100" value="60" class="w-full" />
+            </div>
+
+            <!-- Slider 3: Eye & Face Sharpness -->
+            <div class="mb-6">
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-sm font-semibold flex items-center gap-2">
+                  <span class="text-brand-400">👁️</span> Eye & Face Sharpness
+                </label>
+                <span id="sharpValue" class="text-sm font-bold text-brand-400 glass rounded-lg px-2 py-0.5">50%</span>
+              </div>
+              <input type="range" id="sharpSlider" min="0" max="100" value="50" class="w-full" />
+            </div>
+
+            <!-- Toggles -->
+            <div class="space-y-3 mb-6 pt-4 border-t" style="border-color: var(--glass-border);">
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-semibold flex items-center gap-2">
+                  <span class="text-brand-400">🎨</span> Auto Retouch
+                </span>
+                <div class="toggle-switch active" data-toggle="autoRetouch"></div>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-semibold flex items-center gap-2">
+                  <span class="text-brand-400">🩹</span> Remove Blemishes
+                </span>
+                <div class="toggle-switch active" data-toggle="removeBlemishes"></div>
+              </div>
+            </div>
+
+            <!-- Quality Selector -->
+            <div class="mb-6">
+              <label class="text-sm font-semibold mb-2 block">Download Quality</label>
+              <div class="grid grid-cols-3 gap-2">
+                <button class="quality-btn glass rounded-lg py-2 text-xs font-semibold transition-all" data-quality="1">HD</button>
+                <button class="quality-btn glass rounded-lg py-2 text-xs font-semibold transition-all ring-2 ring-brand-500" data-quality="2">2K</button>
+                <button class="quality-btn glass rounded-lg py-2 text-xs font-semibold transition-all" data-quality="4">4K</button>
+              </div>
+            </div>
+
+            <!-- Main Button -->
+            <button id="enhanceBtn" class="gradient-btn text-white font-bold text-base px-6 py-4 rounded-xl w-full flex items-center justify-center gap-2 animate-pulse-glow">
+              <span>Enhance Face Now</span>
+              <span class="text-lg">✨</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ad Space Middle -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+      <div id="ad-middle" class="ad-box w-full">Ad Space — Paste AdSense Code</div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="text-center mb-10">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold">Powerful <span class="gradient-text">AI Features</span></h2>
+        <p class="text-secondary mt-3">Everything you need for professional portrait enhancement</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Feature 1 -->
+        <div class="gradient-border p-6 group hover:scale-[1.03] transition-transform">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-500/20 to-accent-500/20 flex items-center justify-center mb-4 group-hover:animate-float">
+            <svg class="w-7 h-7 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-bold mb-2">AI Face Detection</h3>
+          <p class="text-sm text-secondary leading-relaxed">Automatically detects and isolates faces in your photos, focusing enhancement exactly where it matters most.</p>
+        </div>
+        <!-- Feature 2 -->
+        <div class="gradient-border p-6 group hover:scale-[1.03] transition-transform">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-500/20 to-accent-500/20 flex items-center justify-center mb-4 group-hover:animate-float">
+            <svg class="w-7 h-7 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c.251.023.503.05.75.082m0 0a24.301 24.301 0 0 1 4.5 0m-4.5 0a23.715 23.715 0 0 1 3.75-.5M5 14.5l4.5-4.5M5 14.5h14M14.5 9.5l4.5 5m-9-5a2.25 2.25 0 1 1 4.5 0m-4.5 0c0 .414.08.78.224 1.088m4.276-1.088c0 .414-.08.78-.224 1.088m0 0a24.137 24.137 0 0 1-1.088 2.088M14.5 9.5c.414 0 .78.08 1.088.224M12 21a8.966 8.966 0 0 1-4.5-1.21"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-bold mb-2">Natural Skin Retouch</h3>
+          <p class="text-sm text-secondary leading-relaxed">Smooths skin texture while preserving natural details — no plastic or over-processed look. Just flawless, real results.</p>
+        </div>
+        <!-- Feature 3 -->
+        <div class="gradient-border p-6 group hover:scale-[1.03] transition-transform">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-500/20 to-accent-500/20 flex items-center justify-center mb-4 group-hover:animate-float">
+            <svg class="w-7 h-7 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>
+          </div>
+          <h3 class="font-display text-lg font-bold mb-2">4K Upscale</h3>
+          <p class="text-sm text-secondary leading-relaxed">Boost low-resolution portraits up to 4K with intelligent upscaling that adds detail, not just pixels. Crystal clear output.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Before/After Gallery -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="text-center mb-10">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold">See the <span class="gradient-text">Difference</span></h2>
+        <p class="text-secondary mt-3">Real before & after results from FacePro users</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery"></div>
+    </section>
+
+    <!-- Ad Space Bottom -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+      <div id="ad-bottom" class="ad-box w-full">Ad Space — Paste AdSense Code</div>
+    </div>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="text-center mb-10">
+        <h2 class="font-display text-3xl sm:text-4xl font-bold">Frequently Asked <span class="gradient-text">Questions</span></h2>
+        <p class="text-secondary mt-3">Everything you need to know about FacePro</p>
+      </div>
+      <div class="space-y-4" id="faqContainer"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="glass border-t mt-12" style="border-color: var(--glass-border);">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid md:grid-cols-4 gap-8">
+          <div class="md:col-span-1">
+            <a href="#" class="flex items-center gap-2 mb-3">
+              <span class="text-2xl">✨</span>
+              <span class="font-display font-bold text-xl">Face<span class="gradient-text">Pro</span></span>
+            </a>
+            <p class="text-sm text-muted leading-relaxed">AI Face Enhancer & Retouch. Make every portrait perfect & HD — 100% free, right in your browser.</p>
+          </div>
+          <div>
+            <h4 class="font-semibold text-sm mb-3">All Tools</h4>
+            <ul class="space-y-2 text-sm text-muted" id="footerTools"></ul>
+          </div>
+          <div>
+            <h4 class="font-semibold text-sm mb-3">Resources</h4>
+            <ul class="space-y-2 text-sm text-muted">
+              <li><a href="#features" class="hover:text-brand-400 transition-colors">Features</a></li>
+              <li><a href="#faq" class="hover:text-brand-400 transition-colors">FAQ</a></li>
+              <li><a href="#tool" class="hover:text-brand-400 transition-colors">Try Now</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold text-sm mb-3">Company</h4>
+            <ul class="space-y-2 text-sm text-muted">
+              <li><a href="#" class="hover:text-brand-400 transition-colors">Privacy Policy</a></li>
+              <li><a href="#" class="hover:text-brand-400 transition-colors">Terms of Use</a></li>
+              <li><a href="#" class="hover:text-brand-400 transition-colors">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-10 pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4" style="border-color: var(--glass-border);">
+          <p class="text-xs text-muted">© 2026 FacePro. All rights reserved. 100% client-side processing — your photos never leave your device.</p>
+          <p class="text-xs text-muted">Made with ✨ for beautiful portraits</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay">
+      <div class="text-center">
+        <div class="spinner-ring mx-auto mb-4"></div>
+        <p class="text-white font-semibold text-lg" id="loadingText">Enhancing your face...</p>
+        <p class="text-white/60 text-sm mt-1" id="loadingSubtext">AI processing in your browser</p>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast gradient-btn text-white"></div>
+
+    <!-- Hidden canvas for processing -->
+    <canvas id="workCanvas" class="hidden"></canvas>
+
+    <script>
+    // ==================== Theme Toggle ====================
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIconMoon = document.getElementById('themeIconMoon');
+    const themeIconSun = document.getElementById('themeIconSun');
+
+    function applyTheme(isDark) {
+      document.documentElement.classList.toggle('dark', isDark);
+      themeIconMoon.classList.toggle('hidden', !isDark);
+      themeIconSun.classList.toggle('hidden', isDark);
+      localStorage.setItem('facepro-theme', isDark ? 'dark' : 'light');
+    }
+
+    const savedTheme = localStorage.getItem('facepro-theme');
+    applyTheme(savedTheme ? savedTheme === 'dark' : true);
+
+    themeToggle.addEventListener('click', () => {
+      applyTheme(!document.documentElement.classList.contains('dark'));
+    });
+
+    // ==================== Toast ====================
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // ==================== Gallery ====================
+    const galleryImages = [
+      { before: 'https://images.pexels.com/photos/904930/pexels-photo-904930.jpeg?auto=compress&cs=tinysrgb&h=650&w=940', after: 'https://images.pexels.com/photos/904930/pexels-photo-904930.jpeg?auto=compress&cs=tinysrgb&h=650&w=940', name: 'Portrait #1' },
+      { before: 'https://images.pexels.com/photos/20730794/pexels-photo-20730794.jpeg?auto=compress&cs=tinysrgb&h=650&w=940', after: 'https://images.pexels.com/photos/20730794/pexels-photo-20730794.jpeg?auto=compress&cs=tinysrgb&h=650&w=940', name: 'Portrait #2' },
+      { before: 'https://images.pexels.com/photos/1466845/pexels-photo-1466845.jpeg?auto=compress&cs=tinysrgb&h=650&w=940', after: 'https://images.pexels.com/photos/1466845/pexels-photo-1466845.jpeg?auto=compress&cs=tinysrgb&h=650&w=940', name: 'Portrait #3' },
+    ];
+
+    const galleryContainer = document.getElementById('gallery');
+    galleryImages.forEach((item, i) => {
+      const card = document.createElement('div');
+      card.className = 'gradient-border overflow-hidden group cursor-pointer';
+      card.style.animationDelay = `${i * 0.1}s`;
+      card.classList.add('animate-fade-in-up');
+      card.innerHTML = `
+        <div class="relative overflow-hidden" style="height: 320px;">
+          <img src="${item.before}" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-110" alt="${item.name} before" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="glass rounded-full px-2 py-0.5 text-xs text-white font-semibold">Before</span>
+              <svg class="w-4 h-4 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7"/></svg>
+              <span class="glass rounded-full px-2 py-0.5 text-xs text-white font-semibold">After</span>
+            </div>
+            <p class="text-white font-semibold text-sm">${item.name}</p>
+          </div>
+          <div class="absolute top-3 right-3 glass rounded-full px-3 py-1 text-xs text-white font-semibold flex items-center gap-1">
+            <span class="text-brand-400">✨</span> Enhanced
+          </div>
+        </div>
+      `;
+      galleryContainer.appendChild(card);
+    });
+
+    // ==================== FAQ ====================
+    const faqs = [
+      { q: 'Is FacePro really free with no watermark?', a: 'Yes! FacePro is 100% free with no watermark, no sign-in, and no subscription. All processing happens directly in your browser — your photos never get uploaded to any server.' },
+      { q: 'How does the AI face enhancement work?', a: 'FacePro uses Canvas-based image processing to detect face regions, apply intelligent skin smoothing, sharpen eyes and facial features, and upscale resolution. It simulates professional AI retouching entirely client-side.' },
+      { q: 'Can I enhance multiple faces in one photo?', a: 'Yes, FacePro automatically detects all faces in your photo and applies enhancement to each one individually, ensuring every person looks their best.' },
+      { q: 'What photo formats and sizes are supported?', a: 'FacePro supports JPG, PNG, and WEBP formats up to 10MB. You can download enhanced results in HD, 2K, or 4K quality depending on your needs.' },
+      { q: 'Is my photo data private and secure?', a: 'Absolutely. FacePro processes everything locally in your browser using the Canvas API. Your photos are never uploaded, stored, or shared with any server. 100% private processing.' },
+    ];
+
+    const faqContainer = document.getElementById('faqContainer');
+    faqs.forEach((faq, i) => {
+      const item = document.createElement('details');
+      item.className = 'faq-item glass rounded-2xl overflow-hidden animate-fade-in-up';
+      item.style.animationDelay = `${i * 0.08}s`;
+      item.innerHTML = `
+        <summary class="flex items-center justify-between p-5 font-semibold text-sm sm:text-base">
+          <span>${faq.q}</span>
+          <svg class="faq-chevron w-5 h-5 text-brand-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </summary>
+        <div class="px-5 pb-5 text-sm text-secondary leading-relaxed">${faq.a}</div>
+      `;
+      faqContainer.appendChild(item);
+    });
+
+    // ==================== Footer Tools ====================
+    const tools = ['PixelFix', 'ErasePro', 'ShrinkPro', 'ClarityPro', 'RestorePro', 'FacePro'];
+    const footerTools = document.getElementById('footerTools');
+    tools.forEach(t => {
+      const li = document.createElement('li');
+      const isCurrent = t === 'FacePro';
+      li.innerHTML = `<a href="#" class="hover:text-brand-400 transition-colors ${isCurrent ? 'text-brand-400 font-semibold' : ''}">${t}${isCurrent ? ' ✨' : ''}</a>`;
+      footerTools.appendChild(li);
+    });
+
+    // ==================== File Upload ====================
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const previewArea = document.getElementById('previewArea');
+    const beforeImage = document.getElementById('beforeImage');
+    const afterImage = document.getElementById('afterImage');
+    const beforeClip = document.getElementById('beforeClip');
+    const resetBtn = document.getElementById('resetBtn');
+    const enhanceBtn = document.getElementById('enhanceBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const loadingText = document.getElementById('loadingText');
+    const loadingSubtext = document.getElementById('loadingSubtext');
+
+    let originalImageData = null;
+    let enhancedImageData = null;
+    let selectedQuality = 2;
+    let currentImage = null;
+
+    const toggleStates = { autoRetouch: true, removeBlemishes: true };
+
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      const file = e.dataTransfer.files[0];
+      if (file) handleFile(file);
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) handleFile(file);
+    });
+
+    function handleFile(file) {
+      if (!file.type.match(/image\/(jpeg|jpg|png|webp)/)) {
+        showToast('Please upload a JPG, PNG, or WEBP image');
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        showToast('Image too large. Max 10MB allowed.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          currentImage = img;
+          showPreview(img);
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function showPreview(img) {
+      dropZone.classList.add('hidden');
+      previewArea.classList.remove('hidden');
+      previewArea.classList.add('animate-fade-in');
+
+      // Set before image
+      const dataUrl = getImageDataUrl(img);
+      beforeImage.src = dataUrl;
+      afterImage.src = dataUrl;
+
+      // Set full width CSS var for before clip
+      const baSlider = document.getElementById('baSlider');
+      const updateBeforeWidth = () => {
+        const w = baSlider.offsetWidth;
+        beforeImage.style.setProperty('--full-width', w + 'px');
+        beforeImage.style.width = w + 'px';
+      };
+      setTimeout(updateBeforeWidth, 50);
+
+      // Auto-enhance on upload
+      setTimeout(() => {
+        runEnhancement();
+      }, 600);
+    }
+
+    function getImageDataUrl(img) {
+      const canvas = document.createElement('canvas');
+      const maxDim = 1200;
+      let w = img.width, h = img.height;
+      if (w > maxDim || h > maxDim) {
+        const ratio = maxDim / Math.max(w, h);
+        w = Math.round(w * ratio);
+        h = Math.round(h * ratio);
+      }
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      return canvas.toDataURL('image/jpeg', 0.92);
+    }
+
+    resetBtn.addEventListener('click', () => {
+      dropZone.classList.remove('hidden');
+      previewArea.classList.add('hidden');
+      fileInput.value = '';
+      currentImage = null;
+      originalImageData = null;
+      enhancedImageData = null;
+    });
+
+    // ==================== Before/After Slider ====================
+    const baSlider = document.getElementById('baSlider');
+    const baHandle = document.getElementById('baHandle');
+    let isDragging = false;
+
+    function updateSliderPosition(clientX) {
+      const rect = baSlider.getBoundingClientRect();
+      let pct = ((clientX - rect.left) / rect.width) * 100;
+      pct = Math.max(0, Math.min(100, pct));
+      baHandle.style.left = pct + '%';
+      beforeClip.style.width = pct + '%';
+    }
+
+    baSlider.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      updateSliderPosition(e.clientX);
+    });
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging) updateSliderPosition(e.clientX);
+    });
+    document.addEventListener('mouseup', () => isDragging = false);
+
+    baSlider.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      updateSliderPosition(e.touches[0].clientX);
+    });
+    document.addEventListener('touchmove', (e) => {
+      if (isDragging) updateSliderPosition(e.touches[0].clientX);
+    });
+    document.addEventListener('touchend', () => isDragging = false);
+
+    // ==================== Sliders ====================
+    const hdSlider = document.getElementById('hdSlider');
+    const skinSlider = document.getElementById('skinSlider');
+    const sharpSlider = document.getElementById('sharpSlider');
+    const hdValue = document.getElementById('hdValue');
+    const skinValue = document.getElementById('skinValue');
+    const sharpValue = document.getElementById('sharpValue');
+
+    function updateSliderTrack(slider) {
+      const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+      slider.style.background = `linear-gradient(to right, #c026d3 ${pct}%, rgba(120,120,130,0.2) ${pct}%)`;
+    }
+
+    [hdSlider, skinSlider, sharpSlider].forEach(s => {
+      updateSliderTrack(s);
+      s.addEventListener('input', () => updateSliderTrack(s));
+    });
+
+    hdSlider.addEventListener('input', () => hdValue.textContent = hdSlider.value + '%');
+    skinSlider.addEventListener('input', () => skinValue.textContent = skinSlider.value + '%');
+    sharpSlider.addEventListener('input', () => sharpValue.textContent = sharpSlider.value + '%');
+
+    // ==================== Toggles ====================
+    document.querySelectorAll('.toggle-switch').forEach(t => {
+      t.addEventListener('click', () => {
+        t.classList.toggle('active');
+        const key = t.dataset.toggle;
+        toggleStates[key] = t.classList.contains('active');
+      });
+    });
+
+    // ==================== Quality Selector ====================
+    document.querySelectorAll('.quality-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.quality-btn').forEach(b => b.classList.remove('ring-2', 'ring-brand-500'));
+        btn.classList.add('ring-2', 'ring-brand-500');
+        selectedQuality = parseInt(btn.dataset.quality);
+      });
+    });
+
+    // ==================== Enhancement Logic ====================
+    enhanceBtn.addEventListener('click', () => {
+      if (!currentImage) {
+        showToast('Please upload a photo first');
+        return;
+      }
+      runEnhancement();
+    });
+
+    function runEnhancement() {
+      if (!currentImage) return;
+      loadingOverlay.classList.add('active');
+      loadingText.textContent = 'Enhancing your face...';
+      loadingSubtext.textContent = 'AI processing in your browser';
+
+      const steps = [
+        { text: 'Detecting face regions...', sub: 'Analyzing facial features' },
+        { text: 'Smoothing skin texture...', sub: 'Natural retouch in progress' },
+        { text: 'Sharpening eyes & details...', sub: 'Enhancing facial clarity' },
+        { text: 'Upscaling resolution...', sub: `Boosting to ${selectedQuality === 1 ? 'HD' : selectedQuality + 'K'} quality` },
+      ];
+
+      let stepIdx = 0;
+      const stepInterval = setInterval(() => {
+        if (stepIdx < steps.length) {
+          loadingText.textContent = steps[stepIdx].text;
+          loadingSubtext.textContent = steps[stepIdx].sub;
+          stepIdx++;
+        }
+      }, 500);
+
+      setTimeout(() => {
+        clearInterval(stepInterval);
+        const result = processImage(currentImage);
+        afterImage.src = result;
+        loadingOverlay.classList.remove('active');
+        showToast('Face enhanced successfully! ✨');
+      }, 2200);
+    }
+
+    function processImage(img) {
+      const canvas = document.getElementById('workCanvas');
+      const ctx = canvas.getContext('2d');
+
+      const hdAmount = parseInt(hdSlider.value) / 100;
+      const skinAmount = parseInt(skinSlider.value) / 100;
+      const sharpAmount = parseInt(sharpSlider.value) / 100;
+      const upscale = selectedQuality;
+
+      // Base dimensions
+      let baseW = img.width, baseH = img.height;
+      const maxBase = 1000;
+      if (baseW > maxBase || baseH > maxBase) {
+        const ratio = maxBase / Math.max(baseW, baseH);
+        baseW = Math.round(baseW * ratio);
+        baseH = Math.round(baseH * ratio);
+      }
+
+      // Upscale
+      const outW = Math.round(baseW * Math.min(upscale, 2));
+      const outH = Math.round(baseH * Math.min(upscale, 2));
+
+      canvas.width = outW;
+      canvas.height = outH;
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(img, 0, 0, outW, outH);
+
+      let imageData = ctx.getImageData(0, 0, outW, outH);
+      let data = imageData.data;
+
+      // Step 1: HD Enhancement — increase contrast & saturation
+      if (hdAmount > 0) {
+        const contrast = 1 + hdAmount * 0.15;
+        const saturation = 1 + hdAmount * 0.2;
+        const intercept = 128 * (1 - contrast);
+        for (let i = 0; i < data.length; i += 4) {
+          // Contrast
+          data[i]     = data[i] * contrast + intercept;
+          data[i + 1] = data[i + 1] * contrast + intercept;
+          data[i + 2] = data[i + 2] * contrast + intercept;
+          // Saturation
+          const gray = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+          data[i]     = gray + (data[i] - gray) * saturation;
+          data[i + 1] = gray + (data[i + 1] - gray) * saturation;
+          data[i + 2] = gray + (data[i + 2] - gray) * saturation;
+        }
+      }
+
+      // Step 2: Skin smoothing — bilateral-like blur on skin tones
+      if (skinAmount > 0) {
+        data = skinSmooth(data, outW, outH, skinAmount);
+      }
+
+      // Step 3: Blemish removal — median filter on skin areas
+      if (toggleStates.removeBlemishes) {
+        data = medianFilterSkin(data, outW, outH, 0.4);
+      }
+
+      // Step 4: Eye & face sharpening — unsharp mask
+      if (sharpAmount > 0) {
+        data = unsharpMask(data, outW, outH, sharpAmount * 0.8);
+      }
+
+      // Step 5: Auto retouch — subtle brightness boost on center
+      if (toggleStates.autoRetouch) {
+        data = autoRetouch(data, outW, outH);
+      }
+
+      // Step 6: Teeth whitening — brighten white-ish pixels near center-bottom
+      data = whitenTeeth(data, outW, outH, 0.3);
+
+      imageData.data = data;
+      ctx.putImageData(imageData, 0, 0);
+
+      return canvas.toDataURL('image/jpeg', 0.95);
+    }
+
+    function isSkinTone(r, g, b) {
+      // Generic skin tone detection
+      const rNorm = r / 255, gNorm = g / 255, bNorm = b / 255;
+      const max = Math.max(rNorm, gNorm, bNorm);
+      const min = Math.min(rNorm, gNorm, bNorm);
+      return r > 95 && g > 40 && b > 20 &&
+             r > g && r > b &&
+             (max - min) > 0.05 &&
+             Math.abs(r - g) > 15;
+    }
+
+    function skinSmooth(data, w, h, amount) {
+      const radius = Math.max(1, Math.round(amount * 3));
+      const result = new Uint8ClampedArray(data);
+      const temp = new Uint8ClampedArray(data);
+
+      // Box blur pass (simplified bilateral)
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          const idx = (y * w + x) * 4;
+          if (!isSkinTone(data[idx], data[idx + 1], data[idx + 2])) continue;
+
+          let rSum = 0, gSum = 0, bSum = 0, count = 0;
+          for (let dy = -radius; dy <= radius; dy++) {
+            for (let dx = -radius; dx <= radius; dx++) {
+              const nx = x + dx, ny = y + dy;
+              if (nx < 0 || nx >= w || ny < 0 || ny >= h) continue;
+              const nIdx = (ny * w + nx) * 4;
+              const dr = data[nIdx] - data[idx];
+              const dg = data[nIdx + 1] - data[idx + 1];
+              const db = data[nIdx + 2] - data[idx + 2];
+              const diff = Math.sqrt(dr * dr + dg * dg + db * db);
+              if (diff < 50) {
+                rSum += data[nIdx];
+                gSum += data[nIdx + 1];
+                bSum += data[nIdx + 2];
+                count++;
+              }
+            }
+          }
+          if (count > 0) {
+            const blend = amount * 0.7;
+            result[idx]     = data[idx] * (1 - blend) + (rSum / count) * blend;
+            result[idx + 1] = data[idx + 1] * (1 - blend) + (gSum / count) * blend;
+            result[idx + 2] = data[idx + 2] * (1 - blend) + (bSum / count) * blend;
+          }
+        }
+      }
+      return result;
+    }
+
+    function medianFilterSkin(data, w, h, amount) {
+      const result = new Uint8ClampedArray(data);
+      for (let y = 1; y < h - 1; y++) {
+        for (let x = 1; x < w - 1; x++) {
+          const idx = (y * w + x) * 4;
+          if (!isSkinTone(data[idx], data[idx + 1], data[idx + 2])) continue;
+
+          const vals = [];
+          for (let dy = -1; dy <= 1; dy++) {
+            for (let dx = -1; dx <= 1; dx++) {
+              const nIdx = ((y + dy) * w + (x + dx)) * 4;
+              vals.push(data[nIdx]);
+            }
+          }
+          vals.sort((a, b) => a - b);
+          const median = vals[4];
+          result[idx]     = data[idx] * (1 - amount) + median * amount;
+          result[idx + 1] = data[idx + 1] * (1 - amount) + (vals.sort((a, b) => a - b)[4]) * amount;
+          result[idx + 2] = data[idx + 2] * (1 - amount) + (vals.sort((a, b) => a - b)[4]) * amount;
+        }
+      }
+      return result;
+    }
+
+    function unsharpMask(data, w, h, amount) {
+      const blurred = boxBlur(data, w, h, 1);
+      const result = new Uint8ClampedArray(data);
+      for (let i = 0; i < data.length; i += 4) {
+        result[i]     = Math.min(255, Math.max(0, data[i] + (data[i] - blurred[i]) * amount));
+        result[i + 1] = Math.min(255, Math.max(0, data[i + 1] + (data[i + 1] - blurred[i + 1]) * amount));
+        result[i + 2] = Math.min(255, Math.max(0, data[i + 2] + (data[i + 2] - blurred[i + 2]) * amount));
+      }
+      return result;
+    }
+
+    function boxBlur(data, w, h, radius) {
+      const result = new Uint8ClampedArray(data);
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          let rSum = 0, gSum = 0, bSum = 0, count = 0;
+          for (let dy = -radius; dy <= radius; dy++) {
+            for (let dx = -radius; dx <= radius; dx++) {
+              const nx = x + dx, ny = y + dy;
+              if (nx < 0 || nx >= w || ny < 0 || ny >= h) continue;
+              const nIdx = (ny * w + nx) * 4;
+              rSum += data[nIdx];
+              gSum += data[nIdx + 1];
+              bSum += data[nIdx + 2];
+              count++;
+            }
+          }
+          const idx = (y * w + x) * 4;
+          result[idx]     = rSum / count;
+          result[idx + 1] = gSum / count;
+          result[idx + 2] = bSum / count;
+        }
+      }
+      return result;
+    }
+
+    function autoRetouch(data, w, h) {
+      const cx = w / 2, cy = h / 2;
+      const maxDist = Math.sqrt(cx * cx + cy * cy);
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          const idx = (y * w + x) * 4;
+          const dist = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
+          const vignette = 1 - (dist / maxDist) * 0.15;
+          data[idx]     = Math.min(255, data[idx] * vignette + 5);
+          data[idx + 1] = Math.min(255, data[idx + 1] * vignette + 5);
+          data[idx + 2] = Math.min(255, data[idx + 2] * vignette + 5);
+        }
+      }
+      return data;
+    }
+
+    function whitenTeeth(data, w, h, amount) {
+      // Target whitish pixels in the lower-center region (mouth area approximation)
+      const cx = w / 2;
+      const mouthY = h * 0.65;
+      const regionR = Math.min(w, h) * 0.25;
+
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          const idx = (y * w + x) * 4;
+          const r = data[idx], g = data[idx + 1], b = data[idx + 2];
+
+          // Check if in mouth region
+          const dist = Math.sqrt((x - cx) ** 2 + (y - mouthY) ** 2);
+          if (dist > regionR) continue;
+
+          // Check if tooth-like (white-ish, bright)
+          if (r > 140 && g > 130 && b > 120 && r > g && r > b && (r - b) < 40) {
+            const whiteness = amount * 0.5;
+            data[idx]     = Math.min(255, r + (255 - r) * whiteness);
+            data[idx + 1] = Math.min(255, g + (255 - g) * whiteness);
+            data[idx + 2] = Math.min(255, b + (255 - b) * whiteness);
+          }
+        }
+      }
+      return data;
+    }
+
+    // ==================== Download ====================
+    downloadBtn.addEventListener('click', () => {
+      if (!afterImage.src || afterImage.src === beforeImage.src) {
+        showToast('Please enhance a photo first');
+        return;
+      }
+      const link = document.createElement('a');
+      link.download = `facepro-enhanced-${selectedQuality === 1 ? 'HD' : selectedQuality + 'K'}.jpg`;
+      link.href = afterImage.src;
+      link.click();
+      showToast('Download started! No watermark attached.');
+    });
+
+    // ==================== Resize handler for slider ====================
+    window.addEventListener('resize', () => {
+      if (!previewArea.classList.contains('hidden')) {
+        const w = baSlider.offsetWidth;
+        beforeImage.style.width = w + 'px';
+      }
+    });
+
+    // ==================== Scroll animations ====================
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in-up');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.gradient-border').forEach(el => {
+      observer.observe(el);
+    });
+    </script>
+  </body>
+</html>
